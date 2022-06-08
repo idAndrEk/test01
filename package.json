@@ -7,7 +7,7 @@
     "dev": "nodemon --inspect dist/index.js",
     "watch": "tsc -w",
     "byild": "tsc",
-    "start": "node disr/index.js"
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",

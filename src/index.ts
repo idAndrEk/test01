@@ -32,18 +32,6 @@ const video = videos.find(v => v.id === id)
 })
 
 app.post('/videos', (req: Request, res: Response) => {
-    if (req.body.title.trim() === '' || req.body.title.length >= 40) {
-        res.status(400).send({
-            "errorsMessages": [
-                {
-                    "message": "maxLength 40",
-                    "field": "title"
-                }
-            ]
-        })
-       return
-    }
-
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,

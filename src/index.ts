@@ -23,7 +23,7 @@ app.get('/videos', (req: Request, res: Response) => {
 
 app.get('/videos/:videoId', (req: Request, res: Response) => {
     const id = +req.params.videoId;
-const video = videos.find(v => v.id === id)
+    const video = videos.find(v => v.id === id)
     if(!video) {
         res.sendStatus(404)
     } else {
@@ -32,6 +32,18 @@ const video = videos.find(v => v.id === id)
 })
 
 app.post('/videos', (req: Request, res: Response) => {
+    if (req.body.title.trim() === '' || req.body.title.length >= 40) {
+        res.status(400).send({
+            "errorsMessages": [
+                {
+                    "message": "maxLength 40",
+                    "field": "title"
+                }
+            ]
+        })
+        return
+    }
+
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
@@ -45,11 +57,11 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
     for (let i = 0; i < videos.length; i++) {
         if (videos[i].id === +req.params.id) {
             videos.splice(i, 1);
-            res.send(204)
+            res.send(200)
             return
         }
     }
-    res.send(404)
+    res.send(204)
 })
 
 // app.delete('/videos/:id',(req: Request, res: Response)=>{
@@ -63,13 +75,24 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
 // })
 
 app.put('/videos/:id',(req: Request, res: Response)=>{
+    if (req.body.title.trim() === '' || req.body.title.length >= 40) {
+        res.status(400).send({
+            "errorsMessages": [
+                {
+                    "message": "maxLength 40",
+                    "field": "title"
+                }
+            ]
+        })
+        return
+    }
     const id = +req.params.id;
     const video = videos.find(v => v.id === id)
     if (video) {
         video.title = req.body.title
-        res.send(video).status(204)
+        res.send(video).status(201)
     } else {
-        res.send(200);
+        res.send(404);
     }
 })
 

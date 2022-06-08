@@ -86,15 +86,7 @@ app.put('/videos/:id',(req: Request, res: Response)=>{
         })
         return
     }
-    const id = +req.params.id;
-    const video = videos.find(v => v.id === id)
-    if (video) {
-        video.title = req.body.title
-        res.send(video).status(200)
-    } else {
-        res.send(404);
-    }
-})
+    })
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

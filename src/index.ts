@@ -57,11 +57,11 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
     for (let i = 0; i < videos.length; i++) {
         if (videos[i].id === +req.params.id) {
             videos.splice(i, 1);
-            res.send(200)
+            res.send(204)
             return
         }
     }
-    res.send(204)
+    res.send(404)
 })
 
 // app.delete('/videos/:id',(req: Request, res: Response)=>{
@@ -90,7 +90,7 @@ app.put('/videos/:id',(req: Request, res: Response)=>{
     const video = videos.find(v => v.id === id)
     if (video) {
         video.title = req.body.title
-        res.send(video).status(201)
+        res.send(video).status(200)
     } else {
         res.send(404);
     }

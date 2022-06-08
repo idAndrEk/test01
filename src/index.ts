@@ -32,19 +32,7 @@ app.get('/videos/:videoId', (req: Request, res: Response) => {
 })
 
 app.post('/videos', (req: Request, res: Response) => {
-    if (req.body.title.trim() === '' || req.body.title.length >= 40) {
-        res.status(400).send({
-            "errorsMessages": [
-                {
-                    "message": "maxLength 40",
-                    "field": "title"
-                }
-            ]
-        })
-        return
-    }
-
-    const newVideo = {
+       const newVideo = {
         id: +(new Date()),
         title: req.body.title,
         author: 'it-incubator.eu'
@@ -74,19 +62,16 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
 //     }
 // })
 
-app.put('/videos/:id',(req: Request, res: Response)=>{
-    if (req.body.title.trim() === '' || req.body.title.length >= 40) {
-        res.status(400).send({
-            "errorsMessages": [
-                {
-                    "message": "maxLength 40",
-                    "field": "title"
-                }
-            ]
-        })
-        return
+app.put('/videos/close',(req: Request, res: Response)=>{
+    const id = +req.params.id;
+    const index = videos.findIndex(v => v.id === id)
+    if (index === -1) {
+        res.sendStatus(404)
+    } else {
+        videos[index].title = req.body.title
+        res.send(204);
     }
-    })
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

@@ -67,9 +67,9 @@ app.put('/videos/:id',(req: Request, res: Response)=>{
     const video = videos.find(v => v.id === id)
     if (video) {
         video.title = req.body.title
-        res.send(video).status(200)
+        res.send(video).status(204)
     } else {
-        res.send(204);
+        res.send(200);
     }
 })
 

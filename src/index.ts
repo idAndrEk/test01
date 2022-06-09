@@ -75,7 +75,8 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
 // })
 
 app.put('/videos/:id',(req: Request, res: Response)=>{
-    if (req.body.title.trim() === '' || req.body.title.length >= 40) {
+    let title = req.body.title
+    if (!title || typeof title !== 'string'.trim() || req.body.title.length >= 40) {
         res.status(400).send({
             "errorsMessages": [
                 {

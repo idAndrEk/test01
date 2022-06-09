@@ -33,11 +33,11 @@ app.get('/videos/:videoId', (req: Request, res: Response) => {
 
 app.post('/videos', (req: Request, res: Response) => {
     let title = req.body.title
-    if (!title || typeof title !== 'string' || !title.trim() || title.length >= 40) {
+    if (!title || typeof title !== 'string' || !title.trim() || title.length > 40) {
         res.status(400).send({
-            "errorsMessages": [{
-                    "message": "maxLength 40",
-                    "field": "title"
+            errorsMessages: [{
+                    message: "maxLength 40",
+                    field: "title"
                 }]
         })
         return;
@@ -74,11 +74,11 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
 
 app.put('/videos/:videoId',(req: Request, res: Response)=>{
     let title = req.body.title
-    if (!title || typeof title !== 'string' || !title.trim() || title.length >= 40) {
+    if (!title || typeof title !== 'string' || !title.trim() || title.length > 40) {
         res.status(400).send({
-            "errorsMessages": [{
-                    "message": "maxLength 40",
-                    "field": "title"
+            errorsMessages: [{
+                    message: "maxLength 40",
+                    field: "title"
                 }]
         })
         return;

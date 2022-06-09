@@ -76,14 +76,12 @@ app.delete('/videos/:id',(req: Request, res: Response)=>{
 
 app.put('/videos/:id',(req: Request, res: Response)=>{
     let title = req.body.title
-    if (!title || typeof title !== 'string'.trim() || req.body.title.length >= 40) {
+    if (!title || typeof title !== 'string'.trim() || title.length >= 40) {
         res.status(400).send({
-            "errorsMessages": [
-                {
+            "errorsMessages": [{
                     "message": "maxLength 40",
                     "field": "title"
-                }
-            ]
+                }]
         })
         return;
     }

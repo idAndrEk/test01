@@ -43,14 +43,13 @@ app.post('/videos', (req: Request, res: Response) => {
         })
         return
     }
-
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
         author: 'it-incubator.eu'
     }
     videos.push(newVideo)
-    res.send(newVideo)
+    res.status(201).send(newVideo)
 })
 
 app.delete('/videos/:id',(req: Request, res: Response)=>{
@@ -90,7 +89,7 @@ app.put('/videos/:id',(req: Request, res: Response)=>{
     const video = videos.find(v => v.id === id)
     if (video) {
         video.title = req.body.title
-        res.send(video).status(201)
+        res.send(video).status(204)
     } else {
         res.send(404);
     }
